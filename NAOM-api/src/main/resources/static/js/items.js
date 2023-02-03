@@ -89,7 +89,7 @@ export function addProductCart(product,cantidad) {
 }
 
 export async function getAllProducts() {
-  const response = await fetch("http://localhost:8080/api/productos/", {
+  const response = await fetch("https://naomecommerce-production.up.railway.app/api/productos/", {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
@@ -100,7 +100,7 @@ export async function getAllProducts() {
 
 export async function getProducts(id) {
   const response = await fetch(
-    `http://localhost:8080/api/productos/all/${id}`,
+    `https://naomecommerce-production.up.railway.app/api/productos/all/${id}`,
     {
       method: "GET",
       headers: {
@@ -112,7 +112,7 @@ export async function getProducts(id) {
 }
 
 export async function addProduct(product, token) {
-  const response = await fetch("http://localhost:8080/api/productos", {
+  const response = await fetch("https://naomecommerce-production.up.railway.app/api/productos", {
     method: "POST",
     body: JSON.stringify(product),
     headers: {
@@ -124,7 +124,7 @@ export async function addProduct(product, token) {
 }
 
 export async function deleteProduct(id, token) {
-  const response = await fetch(`http://localhost:8080/api/productos/${id}`, {
+  const response = await fetch(`https://naomecommerce-production.up.railway.app/api/productos/${id}`, {
     method: "DELETE",
     headers: {
       Authorization: `Bearer: ${token.replaceAll('"', "")}`,
@@ -134,7 +134,7 @@ export async function deleteProduct(id, token) {
 }
 
 export async function updateProduct(id, product, token) {
-  const response = await fetch(`http://localhost:8080/api/productos/${id}`, {
+  const response = await fetch(`https://naomecommerce-production.up.railway.app/api/productos/${id}`, {
     method: "PUT",
     body: JSON.stringify(product),
     headers: {
