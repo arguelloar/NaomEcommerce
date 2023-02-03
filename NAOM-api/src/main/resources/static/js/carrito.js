@@ -11,12 +11,6 @@ let noItems = document.getElementById("noItems");
 let finCompra = document.getElementById("finCompra");
 let subTotal = document.getElementById("subtotal");
 
-try{
-  const usuario = await getUser(localStorage.getItem("token")).then(response => response.json()); 
-}catch{
-  window.location = "/";
-}
-
 
 if(localStorage.getItem("carrito") == undefined){
   noItems.style.display = "block";
