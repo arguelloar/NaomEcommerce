@@ -1,63 +1,105 @@
 import { addProductCart } from "./items.js";
+import { addOrden } from "./usuario.js";
 
 const userArticles = document.getElementById("userArticles");
-const productosCarrito = Array.from(JSON.parse(localStorage.getItem("carrito")));
+let totalText = document.getElementById("totalText");
+let total = 0; 
+let deleteButton = document.getElementsByClassName("delete");
+let plusButton = document.getElementsByClassName("plus");
+let minusButton = document.getElementsByClassName("minus");
+let noItems = document.getElementById("noItems");
+let finCompra = document.getElementById("finCompra");
 
-//Encontramos duplicados por el product.id y los metemos a un map id => cantidad de repetidos
-function findDuplicates(productos){
-  let map1 = new Map();
-  productos.forEach(producto => {
-    let id = producto.id;
-    if(map1.get(id)){
-      map1.set(id,map1.get(id)+1);
-    }else{
-      map1.set(id,1);
-    }
-  })
-  return map1;
+if(localStorage.getItem("carrito") == undefined){
+  noItems.style.display = "block";
 }
 
+const productosCarrito = Array.from(JSON.parse(localStorage.getItem("carrito")));
+productosCarrito.forEach((producto) => {
+  userArticles.innerHTML += addProductCart(producto);
+  total += parseInt(producto.precio);
+});
 
-//Encontramos el producto por el id
 function findProductId(productos,id){
   return productos.filter(product => product.id == id)[0];
 }
 
-findDuplicates(productosCarrito).forEach((value,key) => {
-  let product = findProductId(productosCarrito,key);
-  let cantidad = value;
-  let num = document.getElementById(`count-${key}`);
-  let a = value;
-  userArticles.innerHTML += addProductCart(product,cantidad);
-  let plus = document.getElementById(`plus-${key}`);
-  let minus = document.getElementById(`minus-${key}`);
-  let precioTotal = product.precio*cantidad;
-  let estado = "ENTREGADO";
+totalText.innerHTML = "$"+total+" MXN"
 
-  let ordenes = {
-    "cantidad": ``,
-    "estado": ``,
-    "fecha": ``,
-    "productos": ``,
-    "totalOrden": ``
-  }
 
-  plus.addEventListener("click", (e) => {
-    a++;
-    a = a < 10 ? "0" + a : a;
-    num.innerHTML = a;
-  });
-  
-  minus.addEventListener("click", (e) => {
-    if (a > 1) {
-      a--;
+for (let i = 0; i < productosCarrito.length; i++) {
+  let a = 1;
+  plusButton[i].addEventListener("click", () => {
+      let id = plusButton[i].id.split("-")[1];
+      let count = document.getElementById("count-"+id);
+      let quantity = document.getElementById("quantity-"+id);
+      let totalPrice = document.getElementById("totalPrice-"+id);
+      a++;
+      let cantidad = a;
       a = a < 10 ? "0" + a : a;
-      num.innerHTML = a;
-    }
-  });
-});
+      count.innerText = a;
+      quantity.innerHTML = "Cantidad: "+cantidad;
+      let producto = findProductId(productosCarrito,id);
+      totalPrice.innerHTML = `$${producto.precio*cantidad}`
+      total += parseInt(producto.precio*cantidad);
+      totalText.innerHTML = "$"+total+" MXN"
+      productosCarrito.push(producto);
+      localStorage.setItem("carrito",JSON.stringify(productosCarrito));
+  })
+
+  minusButton[i].addEventListener("click", () => {
+      let id = plusButton[i].id.split("-")[1];
+      let count = document.getElementById("count-"+id);
+      let quantity = document.getElementById("quantity-"+id);
+      let totalPrice = document.getElementById("totalPrice-"+id);
+      if (a > 1) {
+        a--;
+        let cantidad = a;
+        a = a < 10 ? "0" + a : a;
+        count.innerText = a;
+        quantity.innerHTML = "Cantidad: "+cantidad;
+        let producto = findProductId(productosCarrito,id);
+        totalPrice.innerHTML = `$${producto.precio*cantidad}`
+        total += parseInt(producto.precio*cantidad);
+        totalText.innerHTML = "$"+total+" MXN"
+      }  
+  })
+}
+
+window.onbeforeunload = function(){
+  localStorage.removeItem("carrito");
+};
+
+finCompra.addEventListener("click", () => {
+
+  const date = new Date();
+  console.log(date);
+  let day = date.getDate();
+  let month = date.getMonth() + 1;
+  let year = date.getFullYear();
+  let currentDate = `${year}-${month}-${day}`;
+
+  let orden = {
+  "cantidad":`${productosCarrito.length}`,
+  "totalOrden":`${total}`,
+  "estado": `PENDIENTE`,
+  "fecha": `${currentDate}`,
+  "productos": JSON.parse(JSON.stringify(productosCarrito))
+  };
+
+  let token = localStorage.getItem("token");
+  addOrden(orden,token).then(response => response.json());
+})
 
 
 
-// <!-- <p>Su carrito actualmente está vacío.</p>
+
+
+
+
+
+
+
+
+// <!-- <h1>Su carrito actualmente está vacío.</h1>
 //         <a href="./maquillaje.html">Continúe explorando aquí</a> -->

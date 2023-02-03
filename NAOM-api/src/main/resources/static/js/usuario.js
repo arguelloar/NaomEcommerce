@@ -4,18 +4,24 @@ let tableOrders = document.getElementById("tableOrders");
 let userInfo = document.getElementById("userInfo");
 let userAddress = document.getElementById("userAddress");
 const usuario = await getUser(localStorage.getItem("token")).then(response => response.json());
-usuario.ordenes.forEach(orden => {tableOrders.innerHTML += addUserOrders(orden, usuario.direccion)})
+try{
+        usuario.ordenes.forEach(orden => { tableOrders.innerHTML += addUserOrders(orden, usuario.direccion) })
 
-userInfo.innerHTML = 
+        userInfo.innerHTML =
         `Nombre: ${usuario.nombre} ${usuario.apellido}<br><br>
         Correo: ${usuario.correo}<br><br>
         Telefono: ${usuario.telefono}<br>`;
         
-userAddress.innerHTML = `${usuario.direccion}`;
+        userAddress.innerHTML = `${usuario.direccion}`;
+}catch{
+        console.log("");
+}
+
+
 
 
 function addUserOrders(orden, direccion) {
-    return `
+        return `
       <tr>
       <td>${orden.id}</td>
       <td>${orden.fecha}</td>
@@ -24,4 +30,17 @@ function addUserOrders(orden, direccion) {
       <td>${orden.estado}</td>
       </tr>
       `;
+}
+
+
+export async function addOrden(orden, token) {
+        const response = await fetch("https://naomecommerce-production.up.railway.app/api/usuario/orden", {
+                method: "POST",
+                body: JSON.stringify(orden),
+                headers: {
+                        "Content-Type": "application/json",
+                        Authorization: `Bearer: ${token.replaceAll('"', "")}`,
+                },
+});
+        return response;
 }

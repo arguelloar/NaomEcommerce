@@ -32,14 +32,31 @@ filtrarBtn.addEventListener("click", () => {
     .forEach((product) => maquillajeItems(product));
 });
 
+let CloseModal = document.getElementById("CloseModal");
+let btnCerrar = document.getElementById('btnCerrar');
+
+let exampleModal = document.getElementById("exampleModal");
+
+CloseModal.addEventListener("click", () => {
+  exampleModal.style.display = "none";
+})
+
+btnCerrar.addEventListener("click", () => {
+  exampleModal.style.display = "none";
+})
+
 let btnAddCart = document.getElementsByClassName("addCartProd");
-for (let i = 0; i <= btnAddCart.length; i++) {
+for (let i = 0; i < btnAddCart.length; i++) {
   btnAddCart[i].addEventListener("click", () => {
     let id = btnAddCart[i].id;
     if (localStorage.getItem("carrito")) {
       let carritoList = JSON.parse(localStorage.getItem("carrito"));
-      carritoList.push(findProductId(productos,id));
-      localStorage.setItem("carrito", JSON.stringify(carritoList));
+      if(findProductId(carritoList,id) == undefined){
+        carritoList.push(findProductId(productos,id));
+        localStorage.setItem("carrito", JSON.stringify(carritoList));
+      }else{
+        exampleModal.style.display = "block";
+      }
     } else {
       let carritoList = [findProductId(productos,id)];
       localStorage.setItem("carrito", JSON.stringify(carritoList));
@@ -50,3 +67,4 @@ for (let i = 0; i <= btnAddCart.length; i++) {
 function findProductId(productos,id){
   return productos.filter(product => product.id == id)[0];
 }
+

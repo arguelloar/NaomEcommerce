@@ -1,14 +1,12 @@
 package org.generation.naomdb.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import org.hibernate.annotations.OnDelete;
-
-import java.math.BigDecimal;
-import java.time.LocalDate;
-import java.util.Collection;
-import java.util.List;
 
 import javax.persistence.*;
+import java.math.BigDecimal;
+import java.sql.Date;
+import java.time.LocalDate;
+import java.util.List;
 
 @Entity
 @Table(name = "ordenes")
@@ -29,7 +27,7 @@ public class Ordenes {
 	private Estado estado;
 
 	@Column(name = "fecha")
-	private LocalDate fecha;
+	private Date fecha;
 
 	@ManyToMany(cascade = CascadeType.ALL)
 	@JoinTable(

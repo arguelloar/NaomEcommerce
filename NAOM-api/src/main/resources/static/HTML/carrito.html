@@ -69,8 +69,12 @@
   </nav>
   <!-- Carrito -->
   <main class="container">
-    <header class="main-headers mt-3">
-      <h1 class="text-center"> <b> Carrito </b> </h1>
+    <header class="main-headers my-3">
+      <h1 class="text-center my-3"> <b> Carrito </b> </h1>
+      <div id="noItems" class="text-center mt-5" style="display: none;">
+        <h1>Su carrito actualmente está vacío.</h1>
+        <a href="./maquillaje.html">Continúe explorando aquí</a>
+       </div>
     </header>
     <div class="row justify-content-around" id="carrito">
       <!-- User Articles -->
@@ -80,7 +84,7 @@
       <div id="resumen" class="col-lg-5 col-sm-12 mt-3">
           <div id="subtotal">
             <p>Subtotal</p>
-            <p>0.00 MXN</p>
+            <p id="totalText"></p>
           </div>
           <div>
             <p>Este es el resumen de tu compra</p>
