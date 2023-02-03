@@ -34,16 +34,20 @@ let swiper = new Swiper(".mySwiper", {
 });
 
 let btnAddCart = document.getElementsByClassName("addCartProd");
-for (let i = 0; i < btnAddCart.length; i++) {
+for (let i = 0; i <= btnAddCart.length; i++) {
   btnAddCart[i].addEventListener("click", () => {
     let id = btnAddCart[i].id;
     if (localStorage.getItem("carrito")) {
       let carritoList = JSON.parse(localStorage.getItem("carrito"));
-      carritoList.push(productos[id]);
+      carritoList.push(findProductId(productos,id));
       localStorage.setItem("carrito", JSON.stringify(carritoList));
     } else {
-      let carritoList = [productos[id]];
+      let carritoList = [findProductId(productos,id)];
       localStorage.setItem("carrito", JSON.stringify(carritoList));
     }
   });
+}
+
+function findProductId(productos,id){
+  return productos.filter(product => product.id == id)[0];
 }

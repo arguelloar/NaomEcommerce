@@ -101,6 +101,14 @@ btnRegistro.addEventListener("click", function (event) {
 
  
 
+  let registro = {
+    "correo": `${email.value}`,
+    "contrasena": `${password.value}`,
+    "telefono":`${tel.value}`,
+    "direccion":``,
+    "nombre": `${nombre.value}`,
+    "apellido":`${apellido.value}`
+  }
 
   if (validos == 6) {
     userRegister(registro).then(response => {
