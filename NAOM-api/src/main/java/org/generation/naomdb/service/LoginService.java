@@ -53,6 +53,7 @@ public class LoginService {
         usuario.setCorreo(registerDTO.getCorreo());
         usuario.setContrasena(registerDTO.getContrasena());
         usuario.setTelefono(registerDTO.getTelefono());
+        usuario.setDireccion(registerDTO.getDireccion());
         return usuario;
     }
 }

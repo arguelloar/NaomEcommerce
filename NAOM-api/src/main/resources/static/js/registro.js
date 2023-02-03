@@ -107,7 +107,8 @@ btnRegistro.addEventListener("click", function (event) {
     "telefono":`${tel.value}`,
     "direccion":``,
     "nombre": `${nombre.value}`,
-    "apellido":`${apellido.value}`
+    "apellido":`${apellido.value}`,
+    "direccion":"Av. Adolfo López Mateos Sur 2077, Jardines Plaza del Sol, 44510 Guadalajara, Jal."
   }
 
   if (validos == 6) {

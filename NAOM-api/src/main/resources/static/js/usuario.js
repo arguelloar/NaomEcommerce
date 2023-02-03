@@ -3,18 +3,21 @@ import { getUser } from "./auth.js";
 let tableOrders = document.getElementById("tableOrders");
 let userInfo = document.getElementById("userInfo");
 let userAddress = document.getElementById("userAddress");
+let putUsuario = document.getElementById("putUsuario");
+let putNombre = document.getElementById("putNombre");
+let putTelefono = document.getElementById("putTelefono");
 const usuario = await getUser(localStorage.getItem("token")).then(response => response.json());
-try{
+try {
         usuario.ordenes.forEach(orden => { tableOrders.innerHTML += addUserOrders(orden, usuario.direccion) })
 
         userInfo.innerHTML =
-        `Nombre: ${usuario.nombre} ${usuario.apellido}<br><br>
+                `Nombre: ${usuario.nombre} ${usuario.apellido}<br><br>
         Correo: ${usuario.correo}<br><br>
         Telefono: ${usuario.telefono}<br>`;
-        
+
         userAddress.innerHTML = `${usuario.direccion}`;
-}catch{
-        console.log("");
+} catch {
+        console.log("No estas logeado");
 }
 
 
@@ -41,6 +44,6 @@ export async function addOrden(orden, token) {
                         "Content-Type": "application/json",
                         Authorization: `Bearer: ${token.replaceAll('"', "")}`,
                 },
-});
+        });
         return response;
 }

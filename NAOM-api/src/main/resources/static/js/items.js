@@ -61,15 +61,15 @@ export function addTableRows(product) {
 
 export function addProductCart(product) {
   return `
-  <div class="article" id="product#${product.id}">
+  <div class="article" id="product-${product.id}">
           <img class="img-article" src="${product.foto}" alt="">
           <div class="purchase-info">
               <div class="article-info">
                 <p class="article-title">${product.nombre}</p>
                 <p class="article-name">${product.descripcion.slice(0,35)}...</p>
               </div>
-              <div class="delete">
-                <span class="material-symbols-rounded delete" role="button" id="delete${product.id}">delete</span>
+              <div>
+                <span class="material-symbols-rounded delete" role="button" id="delete-${product.id}">delete</span>
               </div>
               <div class="article-total">
                 <p id="quantity-${product.id}">Cantidad: 1</p>

@@ -7,16 +7,19 @@ public class RegisterDTO {
     private String telefono;
     private String nombre;
     private String apellido;
+    private String direccion;
 
-    public RegisterDTO(String correo, String contrasena, String telefono, String nombre, String apellido) {
+
+    public RegisterDTO() {
+    }
+
+    public RegisterDTO(String correo, String contrasena, String telefono, String nombre, String apellido, String direccion) {
         this.correo = correo;
         this.contrasena = contrasena;
         this.telefono = telefono;
         this.nombre = nombre;
         this.apellido = apellido;
-    }
-
-    public RegisterDTO() {
+        this.direccion = direccion;
     }
 
     public String getCorreo() {
@@ -57,5 +60,13 @@ public class RegisterDTO {
 
     public void setApellido(String apellido) {
         this.apellido = apellido;
+    }
+
+    public String getDireccion() {
+        return direccion;
+    }
+
+    public void setDireccion(String direccion) {
+        this.direccion = direccion;
     }
 }
