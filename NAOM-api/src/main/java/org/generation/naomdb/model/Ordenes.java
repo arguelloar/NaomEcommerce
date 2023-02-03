@@ -27,6 +27,7 @@ public class Ordenes {
 	private Estado estado;
 
 	@Column(name = "fecha")
+	@JsonFormat(pattern="yyyy-MM-dd")
 	private Date fecha;
 
 	@ManyToMany(cascade = CascadeType.ALL)

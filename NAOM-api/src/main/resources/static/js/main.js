@@ -35,17 +35,21 @@ let swiper = new Swiper(".mySwiper", {
 
 let btnAddCart = document.getElementsByClassName("addCartProd");
 for (let i = 0; i <= btnAddCart.length; i++) {
-  btnAddCart[i].addEventListener("click", () => {
-    let id = btnAddCart[i].id;
-    if (localStorage.getItem("carrito")) {
-      let carritoList = JSON.parse(localStorage.getItem("carrito"));
-      carritoList.push(findProductId(productos,id));
-      localStorage.setItem("carrito", JSON.stringify(carritoList));
-    } else {
-      let carritoList = [findProductId(productos,id)];
-      localStorage.setItem("carrito", JSON.stringify(carritoList));
-    }
-  });
+  try{
+    btnAddCart[i].addEventListener("click", () => {
+      let id = btnAddCart[i].id;
+      if (localStorage.getItem("carrito")) {
+        let carritoList = JSON.parse(localStorage.getItem("carrito"));
+        carritoList.push(findProductId(productos,id));
+        localStorage.setItem("carrito", JSON.stringify(carritoList));
+      } else {
+        let carritoList = [findProductId(productos,id)];
+        localStorage.setItem("carrito", JSON.stringify(carritoList));
+      }
+    });
+  }catch{
+    console.log("");
+  } 
 }
 
 function findProductId(productos,id){
