@@ -118,6 +118,7 @@ finCompra.addEventListener("click", () => {
 
   let token = localStorage.getItem("token");
   addOrden(orden,token).then(response => response.json());
+  localStorage.removeItem("carrito");
 })
 
 function deleteProduct(productos,id){
