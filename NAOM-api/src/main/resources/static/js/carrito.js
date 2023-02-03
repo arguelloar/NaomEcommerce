@@ -1,5 +1,5 @@
+import { getUser } from "./auth.js";
 import { addProductCart } from "./items.js";
-import { addOrden } from "./usuario.js";
 
 const userArticles = document.getElementById("userArticles");
 let totalText = document.getElementById("totalText");
@@ -10,6 +10,12 @@ let minusButton = document.getElementsByClassName("minus");
 let noItems = document.getElementById("noItems");
 let finCompra = document.getElementById("finCompra");
 let subTotal = document.getElementById("subtotal");
+
+try{
+  const usuario = await getUser(localStorage.getItem("token")).then(response => response.json()); 
+}catch{
+  window.location = "/";
+}
 
 
 if(localStorage.getItem("carrito") == undefined){
@@ -124,6 +130,18 @@ function deleteProduct(productos,id){
 function deleteOneProduct(productos,id){
   return productos.splice(productos.findIndex(producto => producto.id == id), 1);;
 };
+
+async function addOrden(orden, token) {
+  const response = await fetch("https://naomecommerce-production.up.railway.app/api/usuario/orden", {
+          method: "POST",
+          body: JSON.stringify(orden),
+          headers: {
+                  "Content-Type": "application/json",
+                  Authorization: `Bearer: ${token.replaceAll('"', "")}`,
+          },
+  });
+  return response;
+}
 
 
 

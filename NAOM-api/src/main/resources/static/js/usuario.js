@@ -17,7 +17,7 @@ try {
 
         userAddress.innerHTML = `${usuario.direccion}`;
 } catch {
-        console.log("No estas logeado");
+        window.location = "/"
 }
 
 
@@ -33,17 +33,4 @@ function addUserOrders(orden, direccion) {
       <td>${orden.estado}</td>
       </tr>
       `;
-}
-
-
-export async function addOrden(orden, token) {
-        const response = await fetch("https://naomecommerce-production.up.railway.app/api/usuario/orden", {
-                method: "POST",
-                body: JSON.stringify(orden),
-                headers: {
-                        "Content-Type": "application/json",
-                        Authorization: `Bearer: ${token.replaceAll('"', "")}`,
-                },
-        });
-        return response;
 }
