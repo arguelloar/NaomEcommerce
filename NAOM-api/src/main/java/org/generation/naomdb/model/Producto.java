@@ -38,7 +38,7 @@ public class Producto {
     private BigDecimal rating;
 
     @JsonIgnore
-    @ManyToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH, CascadeType.DETACH})
+    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.REFRESH, CascadeType.DETACH})
     @JoinTable(
             name = "ordenes_has_productos",
             joinColumns = @JoinColumn(name = "productos_id"),
