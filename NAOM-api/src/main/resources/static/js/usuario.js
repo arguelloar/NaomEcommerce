@@ -6,8 +6,8 @@ let userAddress = document.getElementById("userAddress");
 let putUsuario = document.getElementById("putUsuario");
 let putNombre = document.getElementById("putNombre");
 let putTelefono = document.getElementById("putTelefono");
-const usuario = await getUser(localStorage.getItem("token")).then(response => response.json());
 try {
+        const usuario = await getUser(localStorage.getItem("token")).then(response => response.json()); 
         usuario.ordenes.forEach(orden => { tableOrders.innerHTML += addUserOrders(orden, usuario.direccion) })
 
         userInfo.innerHTML =
