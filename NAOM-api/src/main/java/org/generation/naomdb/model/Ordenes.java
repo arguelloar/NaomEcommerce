@@ -31,7 +31,7 @@ public class Ordenes {
 	@JsonFormat(pattern="yyyy-MM-dd")
 	private Date fecha;
 
-	@ManyToMany(cascade = CascadeType.ALL)
+	@ManyToMany
 	@JoinTable(
 			name = "ordenes_has_productos",
 			joinColumns = @JoinColumn(name = "productos_id"),
