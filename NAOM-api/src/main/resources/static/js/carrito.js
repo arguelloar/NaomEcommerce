@@ -12,7 +12,7 @@ let finCompra = document.getElementById("finCompra");
 let subTotal = document.getElementById("subtotal");
 
 window.onbeforeunload = function() {
-  if (productosCarrito.length != 1) {
+  if (productosCarrito.length > 0) {
     return 'There is unsaved data.';
   }
   return undefined;
