@@ -11,12 +11,6 @@ let noItems = document.getElementById("noItems");
 let finCompra = document.getElementById("finCompra");
 let subTotal = document.getElementById("subtotal");
 
-window.onbeforeunload = function() {
-  if (productosCarrito.length > 0) {
-    return 'There is unsaved data.';
-  }
-  return undefined;
-}
 
 if(localStorage.getItem("carrito") == undefined){
   noItems.style.display = "block";
@@ -89,6 +83,7 @@ for (let i = 0; i < deleteButton.length; i++) {
       totalText.innerHTML = "$"+total+" MXN"
       productItem.remove();
       productosCarrito = deleteProduct(productosCarrito,id);
+      if(productosCarrito.length == 0)window.location = "/";
     }catch{
       window.location = "/";
     }
@@ -96,9 +91,9 @@ for (let i = 0; i < deleteButton.length; i++) {
 }
 
 
-// window.onbeforeunload = function(){
-//   localStorage.removeItem("carrito");
-// };
+window.onbeforeunload = function(){
+  localStorage.removeItem("carrito");
+};
 
 finCompra.addEventListener("click", () => {
 
