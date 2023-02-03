@@ -115,7 +115,7 @@ btnRegistro.addEventListener("click", function (event) {
       if (response.ok) {
         ModalRegistro.style.display = "block";
         setTimeout(function () {
-          window.location = '../HTML/login.html';
+          window.location = '../HTML/logIn.html';
         }, 3000);
       }
     });
