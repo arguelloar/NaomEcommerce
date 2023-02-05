@@ -44,13 +44,11 @@ public class Ordenes {
 	public Ordenes() {
 	}
 
-	public Ordenes(
-			int cantidad,
-			BigDecimal totalOrden,
-			List<Producto> productos) {
-		this.id = id;
+	public Ordenes(Integer cantidad, BigDecimal totalOrden, Estado estado, Date fecha, List<Producto> productos) {
 		this.cantidad = cantidad;
 		this.totalOrden = totalOrden;
+		this.estado = estado;
+		this.fecha = fecha;
 		this.productos = productos;
 	}
 

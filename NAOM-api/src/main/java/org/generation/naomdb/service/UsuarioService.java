@@ -86,7 +86,7 @@ public class UsuarioService {
     }
 
     private Ordenes ordenesMapper(OrdenesDTO ordenesDTO){
-        return new Ordenes(ordenesDTO.getCantidad(),ordenesDTO.getTotalOrden(),ordenesDTO.getProductos());
+        return new Ordenes(ordenesDTO.getCantidad(),ordenesDTO.getTotalOrden(),ordenesDTO.getEstado(),ordenesDTO.getFecha(),ordenesDTO.getProductos());
     }
 
 }
