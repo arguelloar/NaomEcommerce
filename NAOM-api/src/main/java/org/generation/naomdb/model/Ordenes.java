@@ -38,10 +38,6 @@ public class Ordenes {
 			inverseJoinColumns = @JoinColumn(name = "ordenes_id"))
 	private List<Producto> productos;
 
-	@JsonIgnore
-	@ManyToOne(fetch = FetchType.EAGER)
-	private Usuario usuario;
-
 	
 	public Ordenes() {
 	}
@@ -55,7 +51,6 @@ public class Ordenes {
 		this.cantidad = cantidad;
 		this.totalOrden = totalOrden;
 		this.productos = productos;
-		this.usuario = usuario;
 	}
 
 	public Long getId() {
@@ -106,13 +101,6 @@ public class Ordenes {
 		this.productos = productos;
 	}
 
-	public Usuario getUsuario() {
-		return usuario;
-	}
-
-	public void setUsuario(Usuario usuario) {
-		this.usuario = usuario;
-	}
 
 	@Override
 	public String toString() {

@@ -37,14 +37,6 @@ public class Producto {
     @Column(nullable = false)
     private BigDecimal rating;
 
-    @JsonIgnore
-    @ManyToMany
-    @JoinTable(
-            name = "ordenes_has_productos",
-            joinColumns = @JoinColumn(name = "productos_id"),
-            inverseJoinColumns = @JoinColumn(name = "ordenes_id"))
-    private List<Ordenes> ordenes;
-
     @ManyToOne
     @JoinColumn(
             name = "categorias_id",
@@ -70,7 +62,6 @@ public class Producto {
         this.precio = precio;
         this.stock = stock;
         this.rating = rating;
-        this.ordenes = ordenes;
         this.categorias = categorias;
     }
 
@@ -125,14 +116,6 @@ public class Producto {
 
     public void setRating(BigDecimal rating) {
         this.rating = rating;
-    }
-
-    public List<Ordenes> getOrdenes() {
-        return ordenes;
-    }
-
-    public void setOrdenes(List<Ordenes> ordenes) {
-        this.ordenes = ordenes;
     }
 
     public Categorias getCategorias() {
