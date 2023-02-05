@@ -15,7 +15,7 @@ public class Ordenes {
 	
 	@Id
 	@GeneratedValue (strategy = GenerationType.IDENTITY)
-	@Column(name="id", unique=true, nullable=false)
+	@Column(unique=true)
 	private Long id;
 
 	@Column(nullable=false)

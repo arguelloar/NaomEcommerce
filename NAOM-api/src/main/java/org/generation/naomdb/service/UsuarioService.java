@@ -74,7 +74,7 @@ public class UsuarioService {
         Optional<Usuario> usuarioOpt = usuarioRepository.findByCorreo(email);
         if (usuarioOpt.isPresent()) {
             Usuario usuario = usuarioOpt.get();
-//            ordenes.setUsuario(usuario);
+            ordenes.setUsuario(usuario);
             List<Ordenes> listaOrdenes = usuario.getOrdenes();
             listaOrdenes.add(ordenes);
             usuario.setOrdenes(listaOrdenes);
