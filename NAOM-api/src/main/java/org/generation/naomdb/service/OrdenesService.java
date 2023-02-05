@@ -27,39 +27,39 @@ public class OrdenesService {
         this.usuarioRepository = usuarioRepository;
     }
 
-    public Ordenes deleteOrden(String correo, Long id) throws OrdenNotFound, ServletException {
-        Optional<Ordenes> ordenesOpt = ordenesRepository.findById(id);
-        if (ordenesOpt.isPresent()) {
-            Ordenes ordenes = ordenesOpt.get();
-            if(ordenes.getUsuario().getCorreo() == correo){
-                ordenesRepository.deleteById(id);
-                return ordenes;
-            }
-            throw new ServletException("You dont own this order");
-        }
-        throw new OrdenNotFound("Orden con el id " + id + " no se encuentra");
-    }
-
-    public Ordenes updateOrden(String correo,
-                               Long id,
-                               Integer cantidad,
-                               BigDecimal totalOrden,
-                               List<Producto> productos,
-                               Estado estado) throws OrdenNotFound, ServletException {
-        Optional<Ordenes> ordenes = ordenesRepository.findById(id);
-        if (ordenes.isPresent()) {
-            Ordenes ord = ordenes.get();
-            if(ord.getUsuario().getCorreo().equals(correo)){
-                if (cantidad != null) ord.setCantidad(cantidad);
-                if (totalOrden != null) ord.setTotalOrden(totalOrden);
-                if (productos != null) ord.setProductos(productos);
-                if (estado != null) ord.setEstado(estado);
-                ordenesRepository.save(ord);
-                return ord;
-            }else {
-                throw new ServletException("You dont own this order");
-            }
-        }
-        throw new OrdenNotFound("Orden con el id " + id + " no se encuentra");
-    }
+//    public Ordenes deleteOrden(String correo, Long id) throws OrdenNotFound, ServletException {
+//        Optional<Ordenes> ordenesOpt = ordenesRepository.findById(id);
+//        if (ordenesOpt.isPresent()) {
+//            Ordenes ordenes = ordenesOpt.get();
+//            if(ordenes.getUsuario().getCorreo() == correo){
+//                ordenesRepository.deleteById(id);
+//                return ordenes;
+//            }
+//            throw new ServletException("You dont own this order");
+//        }
+//        throw new OrdenNotFound("Orden con el id " + id + " no se encuentra");
+//    }
+//
+//    public Ordenes updateOrden(String correo,
+//                               Long id,
+//                               Integer cantidad,
+//                               BigDecimal totalOrden,
+//                               List<Producto> productos,
+//                               Estado estado) throws OrdenNotFound, ServletException {
+//        Optional<Ordenes> ordenes = ordenesRepository.findById(id);
+//        if (ordenes.isPresent()) {
+//            Ordenes ord = ordenes.get();
+//            if(ord.getUsuario().getCorreo().equals(correo)){
+//                if (cantidad != null) ord.setCantidad(cantidad);
+//                if (totalOrden != null) ord.setTotalOrden(totalOrden);
+//                if (productos != null) ord.setProductos(productos);
+//                if (estado != null) ord.setEstado(estado);
+//                ordenesRepository.save(ord);
+//                return ord;
+//            }else {
+//                throw new ServletException("You dont own this order");
+//            }
+//        }
+//        throw new OrdenNotFound("Orden con el id " + id + " no se encuentra");
+//    }
 }
