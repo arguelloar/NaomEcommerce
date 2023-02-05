@@ -38,6 +38,8 @@ public class Ordenes {
 			inverseJoinColumns = @JoinColumn(name = "ordenes_id"))
 	private List<Producto> productos;
 
+
+
 	
 	public Ordenes() {
 	}
@@ -45,8 +47,7 @@ public class Ordenes {
 	public Ordenes(
 			int cantidad,
 			BigDecimal totalOrden,
-			List<Producto> productos,
-			Usuario usuario) {
+			List<Producto> productos) {
 		this.id = id;
 		this.cantidad = cantidad;
 		this.totalOrden = totalOrden;
@@ -100,7 +101,6 @@ public class Ordenes {
 	public void setProductos(List<Producto> productos) {
 		this.productos = productos;
 	}
-
 
 	@Override
 	public String toString() {

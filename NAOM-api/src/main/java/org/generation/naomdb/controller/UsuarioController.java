@@ -1,5 +1,6 @@
 package org.generation.naomdb.controller;
 
+import org.generation.naomdb.dto.OrdenesDTO;
 import org.generation.naomdb.helper.TokenHelper;
 import org.generation.naomdb.exception.UserNotFound;
 import org.generation.naomdb.dto.ChangePasswordDTO;
@@ -50,11 +51,11 @@ public class UsuarioController {
     } // updateUsuario
 
     @PostMapping(path = "/orden")
-    public Usuario addOrden(@RequestBody Ordenes ordenes, HttpServletRequest request) throws UserNotFound, ServletException {
+    public Usuario addOrden(@RequestBody OrdenesDTO ordenesDTO, HttpServletRequest request) throws UserNotFound, ServletException {
         String token = TokenHelper.getTokenFromHeader(request);
         return usuarioService.addOrden(
                 TokenHelper.getEmailFromToken(token),
-                ordenes);
+                ordenesDTO);
     }
 
 } // class

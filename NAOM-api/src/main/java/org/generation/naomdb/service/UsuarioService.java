@@ -4,6 +4,7 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 
+import org.generation.naomdb.dto.OrdenesDTO;
 import org.generation.naomdb.exception.UserNotFound;
 import org.generation.naomdb.model.Ordenes;
 import org.generation.naomdb.model.Producto;
@@ -70,18 +71,22 @@ public class UsuarioService {
         throw new UserNotFound("No se ha encontrado el usuario con el correo "+correo);
     }
 
-    public Usuario addOrden(String email, Ordenes ordenes) throws UserNotFound {
+    public Usuario addOrden(String email, OrdenesDTO ordenesDTO) throws UserNotFound {
         Optional<Usuario> usuarioOpt = usuarioRepository.findByCorreo(email);
         if (usuarioOpt.isPresent()) {
             Usuario usuario = usuarioOpt.get();
             List<Ordenes> listaOrdenes = usuario.getOrdenes();
-            listaOrdenes.add(ordenes);
+            listaOrdenes.add(ordenesMapper(ordenesDTO));
             usuario.setOrdenes(listaOrdenes);
             System.out.println(usuario);
             usuarioRepository.save(usuario);
             return usuario;
         }
         throw new UserNotFound("Usuario con correo " + email + " no se ha encontrado");
+    }
+
+    private Ordenes ordenesMapper(OrdenesDTO ordenesDTO){
+        return new Ordenes(ordenesDTO.getCantidad(),ordenesDTO.getTotalOrden(),ordenesDTO.getProductos());
     }
 
 }
