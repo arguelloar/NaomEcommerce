@@ -30,25 +30,25 @@ public class OrdenesController {
 
 
 
-    @DeleteMapping(path = "{pathId}")
-    public Ordenes deleteOrden(HttpServletRequest request,
-                               @PathVariable("pathId") Long id) throws OrdenNotFound, ServletException {
-        String token = TokenHelper.getTokenFromHeader(request);
-        String subject = TokenHelper.getEmailFromToken(token);
-        return ordenesService.deleteOrden(subject,id);
-    }
-
-    @PutMapping(path = "{pathId}")
-    public Ordenes updateOrden(HttpServletRequest request,
-                               @PathVariable("pathId") Long id,
-                               @RequestParam(required = false) Integer cantidad,
-                               @RequestParam(required = false) BigDecimal totalOrden,
-                               @RequestParam(required = false) Estado estado,
-                               @RequestBody(required = false) List<Producto> productos) throws OrdenNotFound, ServletException {
-        String token = TokenHelper.getTokenFromHeader(request);
-        String correo = TokenHelper.getEmailFromToken(token);
-        System.out.println(cantidad);
-        return ordenesService.updateOrden(correo ,id, cantidad, totalOrden, productos, estado);
-    }
+//    @DeleteMapping(path = "{pathId}")
+//    public Ordenes deleteOrden(HttpServletRequest request,
+//                               @PathVariable("pathId") Long id) throws OrdenNotFound, ServletException {
+//        String token = TokenHelper.getTokenFromHeader(request);
+//        String subject = TokenHelper.getEmailFromToken(token);
+//        return ordenesService.deleteOrden(subject,id);
+//    }
+//
+//    @PutMapping(path = "{pathId}")
+//    public Ordenes updateOrden(HttpServletRequest request,
+//                               @PathVariable("pathId") Long id,
+//                               @RequestParam(required = false) Integer cantidad,
+//                               @RequestParam(required = false) BigDecimal totalOrden,
+//                               @RequestParam(required = false) Estado estado,
+//                               @RequestBody(required = false) List<Producto> productos) throws OrdenNotFound, ServletException {
+//        String token = TokenHelper.getTokenFromHeader(request);
+//        String correo = TokenHelper.getEmailFromToken(token);
+//        System.out.println(cantidad);
+//        return ordenesService.updateOrden(correo ,id, cantidad, totalOrden, productos, estado);
+//    }
 
 }
