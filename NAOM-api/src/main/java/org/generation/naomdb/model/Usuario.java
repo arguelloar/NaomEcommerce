@@ -39,7 +39,7 @@ public class Usuario {
     private String direccion;
 
 
-    @OneToMany(mappedBy = "usuario", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<Ordenes> ordenes;
 
 
