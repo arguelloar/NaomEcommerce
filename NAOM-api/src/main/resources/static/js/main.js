@@ -4,6 +4,20 @@ const itemsContainer = document.getElementById("list-items");
 const productos = await getAllProducts().then((response) => response.json());
 productos.forEach((product) => novedadesItems(product));
 
+try{
+  productos.forEach((product) => novedadesItems(product));
+}catch{
+console.log("Cant load products from Maquillaje");
+}
+
+const addCartProd = document.getElementsByClassName("addCartProd");
+let carrito = JSON.parse(localStorage.getItem("carrito"));
+
+if(carrito == null){
+  carrito = [];
+}
+
+
 function novedadesItems(product) {
   itemsContainer.innerHTML += addItem(product);
 }
@@ -33,25 +47,11 @@ let swiper = new Swiper(".mySwiper", {
   },
 });
 
-let btnAddCart = document.getElementsByClassName("addCartProd");
-for (let i = 0; i <= btnAddCart.length; i++) {
-  try{
-    btnAddCart[i].addEventListener("click", () => {
-      let id = btnAddCart[i].id;
-      if (localStorage.getItem("carrito")) {
-        let carritoList = JSON.parse(localStorage.getItem("carrito"));
-        carritoList.push(findProductId(productos,id));
-        localStorage.setItem("carrito", JSON.stringify(carritoList));
-      } else {
-        let carritoList = [findProductId(productos,id)];
-        localStorage.setItem("carrito", JSON.stringify(carritoList));
-      }
-    });
-  }catch{
-    console.log("");
-  } 
-}
 
-function findProductId(productos,id){
-  return productos.filter(product => product.id == id)[0];
-}
+Array.from(addCartProd).forEach(button => {
+  button.addEventListener("click", () => {
+    const product = JSON.parse(button.dataset.product);
+    carrito.push(product);
+    localStorage.setItem("carrito",JSON.stringify(carrito));
+  })
+})

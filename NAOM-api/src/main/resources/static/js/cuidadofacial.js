@@ -5,65 +5,47 @@ let maxVal = document.getElementById("maxVal");
 let minVal = document.getElementById("minVal");
 const filtrarBtn = document.getElementById("filtrarBtn");
 const productos = await getProducts(3).then((response) => response.json());
-productos.forEach((product) => maquillajeItems(product));
+
+let carrito = JSON.parse(localStorage.getItem("carrito"));
+if(carrito == null){
+  carrito = [];
+}
+
+
+try{
+    productos.forEach((product) => maquillajeItems(product));
+    const addCartProd = document.getElementsByClassName("addCartProd");
+    buttonEvents(addCartProd);
+}catch{
+  console.log("Cant load products from Maquillaje");
+}
 
 function maquillajeItems(product) {
   cardWrapper.innerHTML += addItems(product);
 }
 
 filtrarBtn.addEventListener("click", () => {
+  if(minVal.value === ""){
+    minVal.value = 0;
+  }
+
+  if(maxVal.value === ""){
+    maxVal.value = 1500;
+  }
+
   cardWrapper.innerHTML = "";
-  let min = minVal.value;
-  let max = maxVal.value;
+  const filteredProducts = productos.filter(producto => producto.precio >= minVal.value && producto.precio <= maxVal.value);
+  filteredProducts.forEach(product => maquillajeItems(product));
+  const addCartProd = document.getElementsByClassName("addCartProd");
+  buttonEvents(addCartProd);
+})
 
-  if (!min) {
-    min = "0";
-  }
-
-  if (!max) {
-    max = "1500";
-  }
-
-  productos
-    .filter((product) => {
-      if (product.precio >= parseInt(min) && product.precio <= parseInt(max))
-        return true;
+function buttonEvents(products){
+  Array.from(products).forEach(button => {
+    button.addEventListener("click", () => {
+      const product = JSON.parse(button.dataset.product);
+      carrito.push(product);
+      localStorage.setItem("carrito",JSON.stringify(carrito));
     })
-    .forEach((product) => maquillajeItems(product));
-});
-
-let CloseModal = document.getElementById("CloseModal");
-let btnCerrar = document.getElementById('btnCerrar');
-
-let exampleModal = document.getElementById("exampleModal");
-
-CloseModal.addEventListener("click", () => {
-  exampleModal.style.display = "none";
-})
-
-btnCerrar.addEventListener("click", () => {
-  exampleModal.style.display = "none";
-})
-
-let btnAddCart = document.getElementsByClassName("addCartProd");
-for (let i = 0; i < btnAddCart.length; i++) {
-  btnAddCart[i].addEventListener("click", () => {
-    let id = btnAddCart[i].id;
-    if (localStorage.getItem("carrito")) {
-      let carritoList = JSON.parse(localStorage.getItem("carrito"));
-      if(findProductId(carritoList,id) == undefined){
-        carritoList.push(findProductId(productos,id));
-        localStorage.setItem("carrito", JSON.stringify(carritoList));
-      }else{
-        exampleModal.style.display = "block";
-      }
-    } else {
-      let carritoList = [findProductId(productos,id)];
-      localStorage.setItem("carrito", JSON.stringify(carritoList));
-    }
-  });
-}
-
-function findProductId(productos,id){
-  return productos.filter(product => product.id == id)[0];
+  })
 }

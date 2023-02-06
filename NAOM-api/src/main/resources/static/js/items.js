@@ -15,7 +15,7 @@ export function addItem(product) {
 
         <div class="card-price">$${product.precio}</div>
     </div>
-    <a href="#" id="${
+    <a data-product='${JSON.stringify(product)}' id="${
       product.id
     }" class="addCartProd mt-1 mb-2 position-relative bottom-0" type="submit"><strong>Agregar al carrito</a>
     </div>
@@ -24,7 +24,7 @@ export function addItem(product) {
 
 export function addItems(product) {
   return `
-    <div class="card col-xl-2 col-lg-3 col-sm-5 col-10  my-2 mx-2" >
+    <div class="products card col-xl-2 col-lg-3 col-sm-5 col-10  my-2 mx-2" >
     <div class="text-center">
     <img src="${product.foto}" "class="card-img-top" alt="image">
     </div>
@@ -38,7 +38,7 @@ export function addItems(product) {
 
         <div class="card-price">$${product.precio}</div>
     </div>
-    <a href="#" id="${product.id}" class="addCartProd mt-1 mb-2 position-relative bottom-0" type="submit">Agregar al carrito</strong></a>
+    <a data-product='${JSON.stringify(product)}' id="${product.id}" class="addCartProd mt-1 mb-2 position-relative bottom-0" type="submit">Agregar al carrito</strong></a>
     </div>
     `;
 }
@@ -59,7 +59,7 @@ export function addTableRows(product) {
     `;
 }
 
-export function addProductCart(product) {
+export function addProductCart(product,cantidad) {
   return `
   <div class="article" id="product-${product.id}">
           <img class="img-article" src="${product.foto}" alt="">
@@ -72,13 +72,13 @@ export function addProductCart(product) {
                 <span class="material-symbols-rounded delete" role="button" id="delete-${product.id}">delete</span>
               </div>
               <div class="article-total">
-                <p id="quantity-${product.id}">Cantidad: 1</p>
+                <p id="quantity-${product.id}" data-count="${cantidad}" class="cantidad">Cantidad: ${cantidad}</p>
                 <p class="total-price" id="totalPrice-${product.id}">$${product.precio}</p>
               </div>
               <div class="btnIncDec">
                 <div class="btn-commands">
                   <span class="minus" id="minus-${product.id}">-</span>
-                  <span class="num" id="count-${product.id}">01</span>
+                  <span class="num cantidad" data-count="${cantidad}" id="count-${product.id}">${cantidad}</span>
                   <span class="plus" id="plus-${product.id}">+</span>
                 </div>
               </div>
