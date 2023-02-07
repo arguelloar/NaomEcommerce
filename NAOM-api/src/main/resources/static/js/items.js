@@ -52,8 +52,8 @@ export function addTableRows(product) {
     <td>${product.descripcion}</td>
     <td>${product.stock}</td>
     <td class="justify-content-around">
-      <button class="col-12 my-2 crud" id="update-${product.id}">Editar</button>
-      <button class="col-12 crud" id="delete-${product.id}">Borrar</button>
+      <button class="col-12 my-2 crudUpdate" id="update-${product.id}">Editar</button>
+      <button class="col-12 crudDelete" id="delete-${product.id}">Borrar</button>
     </td>
     </tr>
     `;

@@ -9,7 +9,7 @@ body .form-control {
     border: 1px black solid;
 }
 
-#btnProduct, #btnConfirm{
+#btnProduct, #btnConfirm, .crudUpdate{
     background-color: #EFCFCF;
     color: #1C315E;
     border-radius: 5%;
@@ -24,7 +24,7 @@ body .form-control {
     padding: 6px 14px;
 }
 
-#btnProductCancel, #btnCerrar{
+#btnProductCancel, #btnCerrar, .crudDelete{
     background-color: black;
     color: #ffffff;
     border-radius: 5%;
@@ -63,7 +63,15 @@ form div {
     margin-bottom: 2rem;
 }
 
-.crud:hover {
+.crudUpdate:hover {
     background-color: white;
     border: 2px solid #EFCFCF;
+    padding: 6px 14px;
+}
+
+.crudDelete:hover {
+    color: black;
+    background-color: #ffffff;
+    padding: 0.4rem 0.9rem;
+    border: 2px solid black;
 }
