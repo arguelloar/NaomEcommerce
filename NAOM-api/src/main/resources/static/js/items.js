@@ -51,9 +51,9 @@ export function addTableRows(product) {
     <td>${product.precio}</td>
     <td>${product.descripcion}</td>
     <td>${product.stock}</td>
-    <td class="justify-content-around">
-      <button class="col-12 my-2 crudUpdate" id="update-${product.id}">Editar</button>
-      <button class="col-12 crudDelete" id="delete-${product.id}">Borrar</button>
+    <td>
+      <button role="link" href="#formulario" class="crudUpdate my-2" id="update-${product.id}">Editar</button>
+      <button role="link" class="crudDelete" id="delete-${product.id}">Borrar</button>
     </td>
     </tr>
     `;
@@ -134,9 +134,9 @@ export async function deleteProduct(id, token) {
 }
 
 export async function updateProduct(id, product, token) {
-  const response = await fetch(`https://naomecommerce-production.up.railway.app/api/productos/${id}`, {
+  const URLParam = `nombre=${product.nombre}&descripcion=${product.descripcion}&foto=${product.foto}&precio=${product.precio}&stock=${product.stock}`;
+  const response = await fetch(`https://naomecommerce-production.up.railway.app/api/productos/${id}?${URLParam}`, {
     method: "PUT",
-    body: JSON.stringify(product),
     headers: {
       "Content-Type": "application/json",
       Authorization: `Bearer: ${token.replaceAll('"', "")}`,

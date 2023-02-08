@@ -12,6 +12,7 @@ let btnProductCancel = document.getElementById("btnProductCancel");
 let btnProduct = document.getElementById("btnProduct");
 let alertSuccess = document.getElementById("alertSuccess");
 let valorCategoria = document.getElementById("selectorCategoria");
+let editProduct = document.getElementById("editProduct");
 let categoria;
 
 let alertName = document.getElementById("alertProductName");
@@ -30,15 +31,16 @@ productos.forEach(producto => tableRowAdd(producto));
 let image;
 
 var myWidget = cloudinary.createUploadWidget({
-  cloudName: 'domamliq5', 
-  uploadPreset: 'xvfhpubb'}, (error, result) => { 
-    if (!error && result && result.event === "success") { 
-      prevImg.src = result.info.url;
-    }
+  cloudName: 'domamliq5',
+  uploadPreset: 'xvfhpubb'
+}, (error, result) => {
+  if (!error && result && result.event === "success") {
+    prevImg.src = result.info.url;
   }
+}
 );
 
-document.getElementById("upload_widget").addEventListener("click", function(e){
+document.getElementById("upload_widget").addEventListener("click", function (e) {
   e.preventDefault();
   myWidget.open();
 });
@@ -47,94 +49,87 @@ document.getElementById("upload_widget").addEventListener("click", function(e){
 form.addEventListener("submit", (e) => {
   e.preventDefault();
   alertSuccess.innerHTML = "";
-  alertSuccess.style.display="none";
+  alertSuccess.style.display = "none";
 
   image = prevImg.src;
 
   let valido = true;
 
-  console.log(valorCategoria.value)
   switch (valorCategoria.value) {
     case "1":
-      categoria = {"id": 1, "tipoDeProducto": "Maquillaje"};
-      console.log(categoria);
+      categoria = { "id": 1, "tipoDeProducto": "Maquillaje" };
       break;
     case "2":
-      categoria = {"id": 2,  "tipoDeProducto": "Brochas"};
-      console.log(categoria);
+      categoria = { "id": 2, "tipoDeProducto": "Brochas" };
       break;
     case "3":
-      categoria = {"id": 3,  "tipoDeProducto": "Cuidado Facial"};
-      console.log(categoria);
+      categoria = { "id": 3, "tipoDeProducto": "Cuidado Facial" };
       break;
     case "4":
-      categoria = {"id": 4,  "tipoDeProducto": "Accesorios"};
-      console.log(categoria);
+      categoria = { "id": 4, "tipoDeProducto": "Accesorios" };
       break;
-  
+
     default:
       break;
   }
 
-  let product = {"nombre":`${name1.value}`,
-      "precio":`${price.value}`,
-      "descripcion":`${description.value}`,
-      "stock":`${stock.value}`,
-      "foto":`${prevImg.src}`,
-      "rating": 10,
-      "foto":`${image}}`,
-      "categorias": categoria}
+  let product = {
+    "nombre": `${name1.value}`,
+    "precio": `${price.value}`,
+    "descripcion": `${description.value}`,
+    "stock": `${stock.value}`,
+    "foto": `${prevImg.src}`,
+    "rating": 10,
+    "foto": `${image}}`,
+    "categorias": categoria
+  }
 
-  if (product.nombre.length < 3 || product.nombre.length > 20)
-  {
+  if (product.nombre.length < 3 || product.nombre.length > 40) {
     valido = false;
-    alertName.style.display="block";
+    alertName.style.display = "block";
     name1.style.border = "solid red 1px";
   } else {
     name1.style.border = "solid green 1px";
-    alertName.style.display="none";
+    alertName.style.display = "none";
   }
 
-  
-  if (parseInt(product.precio)<=0 || isNaN(parseInt(product.precio)))
-  {
+
+  if (parseInt(product.precio) <= 0 || isNaN(parseInt(product.precio))) {
     valido = false;
-    alertPrice.style.display="block";
+    alertPrice.style.display = "block";
     price.style.border = "solid red 1px";
   } else {
-    alertPrice.style.display="none";
+    alertPrice.style.display = "none";
     price.style.border = "solid green 1px";
   }
 
-  if (product.descripcion.length < 15)
-  {
+  if (product.descripcion.length < 15) {
     valido = false;
-    alertDescription.style.display="block";
+    alertDescription.style.display = "block";
     description.style.border = "solid red 1px";
   } else {
-    alertDescription.style.display="none";
+    alertDescription.style.display = "none";
     description.style.border = "solid green 1px";
   }
 
-  if (prevImg == undefined){
+  if (prevImg == undefined) {
     valido = false;
     alertImg.style.display = "block";
-  }else{
+  } else {
     alertImg.style.display = "none";
   }
 
-  if (parseInt(product.stock) < 0 || isNaN(parseInt(product.stock)) )
-  {
+  if (parseInt(product.stock) < 0 || isNaN(parseInt(product.stock))) {
     valido = false;
-    alertStock.style.display="block";
+    alertStock.style.display = "block";
     stock.style.border = "solid red 1px";
   } else {
-    alertStock.style.display="none";
+    alertStock.style.display = "none";
     stock.style.border = "solid green 1px";
   }
 
-  if(valido){
-    exampleModal.style.display="block";
+  if (valido) {
+    exampleModal.style.display = "block";
   }
 });
 
@@ -144,49 +139,51 @@ btnConfirm.addEventListener("click", (e) => {
   e.preventDefault();
   switch (valorCategoria.value) {
     case "1":
-      categoria = {"id": 1, "tipoDeProducto": "Maquillaje"};
+      categoria = { "id": 1, "tipoDeProducto": "Maquillaje" };
       console.log(categoria);
       break;
     case "2":
-      categoria = {"id": 2,  "tipoDeProducto": "Brochas"};
+      categoria = { "id": 2, "tipoDeProducto": "Brochas" };
       console.log(categoria);
       break;
     case "3":
-      categoria = {"id": 3,  "tipoDeProducto": "Cuidado Facial"};
+      categoria = { "id": 3, "tipoDeProducto": "Cuidado Facial" };
       console.log(categoria);
       break;
     case "4":
-      categoria = {"id": 4,  "tipoDeProducto": "Accesorios"};
+      categoria = { "id": 4, "tipoDeProducto": "Accesorios" };
       console.log(categoria);
       break;
-  
+
     default:
       break;
   }
 
-  let product = {"nombre":`${name1.value}`,
-      "precio":`${price.value}`,
-      "descripcion":`${description.value}`,
-      "stock":`${stock.value}`,
-      "foto":`${image}`,
-      "rating": 10,
-      "categorias": categoria}
+  let product = {
+    "nombre": `${name1.value}`,
+    "precio": `${price.value}`,
+    "descripcion": `${description.value}`,
+    "stock": `${stock.value}`,
+    "foto": `${image}`,
+    "rating": 10,
+    "categorias": categoria
+  }
 
-  addProduct(product,localStorage.getItem("token")).then(response => response.json()).then(data =>console.log(data))
+  addProduct(product, localStorage.getItem("token")).then(response => response.json()).then(data => console.log(data),"POST")
 
 
-  
-  exampleModal.style.display="none";
+
+  exampleModal.style.display = "none";
 });
 
-btnCerrar.addEventListener("click", function() {
-      
-  exampleModal.style.display="none";
+btnCerrar.addEventListener("click", function () {
+
+  exampleModal.style.display = "none";
 });
 
-CloseModal.addEventListener("click", function() {
-      
-  exampleModal.style.display="none";
+CloseModal.addEventListener("click", function () {
+
+  exampleModal.style.display = "none";
 });
 
 btnProductCancel.addEventListener("click", (e) => {
@@ -195,44 +192,76 @@ btnProductCancel.addEventListener("click", (e) => {
   price.value = "";
   description.value = "";
   stock.value = "";
-  img = undefined;
   prevImg.src = "../Fotos_pagina/photo-camera.png";
-  alertName.style.display="none";
-  alertPrice.style.display="none";
-  alertDescription.style.display="none";
-  alertStock.style.display="none";
+  alertName.style.display = "none";
+  alertPrice.style.display = "none";
+  alertDescription.style.display = "none";
+  alertStock.style.display = "none";
   name1.style.border = "";
   price.style.border = "";
   description.style.border = "";
   stock.style.border = "";
+  valorCategoria.value = 0;
   alertImg.style.display = "none";
+  editProduct.style.display = "none";
+  btnProduct.style.display = "block";
 });
 
 
-window.addEventListener("load", () => {
-  let crud = document.getElementsByClassName("crud");
-  Array.from(crud).forEach(button => button.addEventListener("click", () => {
-    let method = button.id.split("-")[0];
-    let id = button.id.split("-")[1];
-    if(method == "delete"){
-      deleteProduct(id,token);
+let crud = document.getElementsByClassName("crudDelete");
+Array.from(crud).forEach(button => button.addEventListener("click", () => {
+  let id = button.id.split("-")[1];
+  deleteProduct(id, token).then(res => {
+    if(res.ok){
       location.reload();
-    }else if(method == "update"){
-      //AQUI VA EL FILTRO POR ID PARA SACAR LOS DATOS DEL OBJETO Y EL editProduct
     }
-  }));
-})
+  })
+}));
+
+let crudUpdate = document.getElementsByClassName("crudUpdate");
+Array.from(crudUpdate).forEach(button => button.addEventListener("click", () => {
+  window.location = "#formulario";
+  let id = button.id.split("-")[1];
+  let producto = filterId(productos,id)[0];
+  name1.value = `${producto.nombre}`;
+  price.value = `${producto.precio}`;
+  description.value = `${producto.descripcion}`;
+  stock.value = `${producto.stock}`;
+  valorCategoria.value = `${producto.categorias.id}`;
+  prevImg.src = `${producto.foto}`;
+  image = `${producto.foto}`;
+  btnProduct.style.display = "none";
+  editProduct.style.display = "block";
+
+  editProduct.addEventListener("click", () => {
+
+    let product = {
+      "nombre": `${name1.value}`,
+      "precio": `${price.value}`,
+      "descripcion": `${description.value}`,
+      "stock": `${stock.value}`,
+      "foto": `${image}`,
+      "rating": 10,
+    }
+  
+    updateProduct(id,product,token).then(res => {
+      if(res.ok){
+        location.reload();
+      }
+    })
+  
+  })
+}));
+
+
+
 
 function tableRowAdd(product) {
-  tableRow.innerHTML += addTableRows(product);
+  tableRow.insertAdjacentHTML("beforeend", addTableRows(product));
 }
 
-function filterId(productos,id){
+function filterId(productos, id) {
   return productos.filter(producto => producto.id == id);
-}
-
-function editProduct(product){
-  //AQUI VAN LOS INPUTS DEL MODAL PARA LA EDICION
 }
 
 
