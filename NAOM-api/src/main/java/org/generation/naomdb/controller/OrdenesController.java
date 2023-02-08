@@ -28,14 +28,11 @@ public class OrdenesController {
         this.ordenesService = ordenesService;
     }
 
-
-
-    @DeleteMapping(path = "{pathId}")
-    public Ordenes deleteOrden(HttpServletRequest request,
-                               @PathVariable("pathId") Long id) throws OrdenNotFound, ServletException {
-        String token = TokenHelper.getTokenFromHeader(request);
-        String subject = TokenHelper.getEmailFromToken(token);
-        return ordenesService.deleteOrden(subject,id);
+    @PutMapping(path = "{pathId}")
+    public Ordenes updateOrden(HttpServletRequest request,
+                               @PathVariable("pathId") Long id,
+                               @RequestParam(required = false) Estado estado) throws OrdenNotFound, ServletException {
+        return ordenesService.updateOrden(id, estado);
     }
 
 }
