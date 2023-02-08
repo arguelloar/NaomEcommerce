@@ -84,7 +84,7 @@ form.addEventListener("submit", (e) => {
     "categorias": categoria
   }
 
-  if (product.nombre.length < 3 || product.nombre.length > 40) {
+  if (product.nombre.length < 3 || product.nombre.length > 60) {
     valido = false;
     alertName.style.display = "block";
     name1.style.border = "solid red 1px";
