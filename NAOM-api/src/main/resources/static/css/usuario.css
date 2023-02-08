@@ -24,3 +24,18 @@ main {
 {
     text-align: left;
 }
+
+button{
+  background-color: #EFCFCF;
+  color: #1C315E;
+  border-radius: 5%;
+  border: 0;
+  padding: 0.5rem 1rem;
+  font-weight: bold;
+}
+
+button:hover {
+  background-color: white;
+  border: 1px solid #EFCFCF;
+  padding: 0.4rem 0.9rem;
+}
