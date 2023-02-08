@@ -41,7 +41,7 @@ Array.from(buttonCancelar).forEach(button => button.addEventListener("click", ()
 //Funcion de fetch para anadir ordenes.
 async function editOrden(estado, token,id) {
         const response = await fetch(`https://naomecommerce-production.up.railway.app/api/orden/${id}?estado=${estado}`, {
-                method: "POST",
+                method: "PUT",
                 headers: {
                         "Content-Type": "application/json",
                         Authorization: `Bearer: ${token.replaceAll('"', "")}`,
