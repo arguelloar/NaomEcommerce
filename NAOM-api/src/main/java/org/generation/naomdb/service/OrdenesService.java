@@ -4,6 +4,7 @@ import org.generation.naomdb.exception.OrdenNotFound;
 import org.generation.naomdb.model.Estado;
 import org.generation.naomdb.model.Ordenes;
 import org.generation.naomdb.model.Producto;
+import org.generation.naomdb.model.Usuario;
 import org.generation.naomdb.repository.OrdenesRepository;
 import org.generation.naomdb.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +14,7 @@ import javax.servlet.ServletException;
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Stream;
 
 @Service
 public class OrdenesService {
@@ -27,39 +29,15 @@ public class OrdenesService {
         this.usuarioRepository = usuarioRepository;
     }
 
-//    public Ordenes deleteOrden(String correo, Long id) throws OrdenNotFound, ServletException {
-//        Optional<Ordenes> ordenesOpt = ordenesRepository.findById(id);
-//        if (ordenesOpt.isPresent()) {
-//            Ordenes ordenes = ordenesOpt.get();
-//            if(ordenes.getUsuario().getCorreo() == correo){
-//                ordenesRepository.deleteById(id);
-//                return ordenes;
-//            }
-//            throw new ServletException("You dont own this order");
-//        }
-//        throw new OrdenNotFound("Orden con el id " + id + " no se encuentra");
-//    }
-//
-//    public Ordenes updateOrden(String correo,
-//                               Long id,
-//                               Integer cantidad,
-//                               BigDecimal totalOrden,
-//                               List<Producto> productos,
-//                               Estado estado) throws OrdenNotFound, ServletException {
-//        Optional<Ordenes> ordenes = ordenesRepository.findById(id);
-//        if (ordenes.isPresent()) {
-//            Ordenes ord = ordenes.get();
-//            if(ord.getUsuario().getCorreo().equals(correo)){
-//                if (cantidad != null) ord.setCantidad(cantidad);
-//                if (totalOrden != null) ord.setTotalOrden(totalOrden);
-//                if (productos != null) ord.setProductos(productos);
-//                if (estado != null) ord.setEstado(estado);
-//                ordenesRepository.save(ord);
-//                return ord;
-//            }else {
-//                throw new ServletException("You dont own this order");
-//            }
-//        }
-//        throw new OrdenNotFound("Orden con el id " + id + " no se encuentra");
-//    }
+    public Ordenes deleteOrden(String correo, Long id) throws OrdenNotFound, ServletException {
+        Optional<Usuario> usuario = usuarioRepository.findByCorreo(correo);
+        if (usuario.isPresent()) {
+            Usuario u = usuario.get();
+            ordenesRepository.deleteById(id);
+            List<Ordenes> ordenes = u.getOrdenes().stream().filter(orden -> orden.getId() != id).toList();
+            u.setOrdenes(ordenes);
+            usuarioRepository.save(u);
+        }
+        throw new OrdenNotFound("Orden con el id " + id + " no se encuentra");
+    }
 }
