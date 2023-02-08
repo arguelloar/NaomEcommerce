@@ -17,6 +17,7 @@ try {
 
         userAddress.innerHTML = `${usuario.direccion}`;
 } catch {
+        localStorage.removeItem("carrito");
         window.location = "/"
 }
 
