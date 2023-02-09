@@ -54,5 +54,5 @@
  - [x] Pagina de catalogo
  - [x] Pagina de registro/login
  - [x] Pagina de carrito de producto
- - [ ] REST API
- - [ ] Publicar pagina
+ - [x] REST API
+ - [x] Publicar pagina
