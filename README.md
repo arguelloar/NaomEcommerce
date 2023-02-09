@@ -3,6 +3,8 @@
 # NAOM E-COMMERCE
 **El proyecto a desarrollar es la creación de un e-commerce para la marca “Natalia Original Makeup (NAOM)” dedicada a la venta de maquillaje. Algunos requerimientos que se solicitan en el proyecto es la creación del stock de venta de la tienda, el catálogo de productos y compra venta del mismo por medio de una interfaz amigable con el usuario.**
 
+**Link de la pagina: https://naomecommerce-production.up.railway.app/**
+
 ## Diseño en Figma
 
  https://www.figma.com/file/I0tg7mpwyBdXIat7tk2Dr5/--Maqueta-NAOM.?node-id=0%3A1&t=s8EEtzpd8clJ78LK-1 
